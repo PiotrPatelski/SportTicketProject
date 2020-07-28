@@ -17,6 +17,53 @@ MainWindow::~MainWindow()
 }
 
 
+///////////
+//DESKTOP//
+///////////
+
+void MainWindow::on_DBconnectButton_clicked()
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    //db.setHostName("192.168.0.73");
+   // db.setUserName("root");
+    //db.setPassword("Q29zjyip.");
+    db.setDatabaseName("C:/Users/Patelnia/Desktop/sqlite3/patelnia.db");
+    if(db.open()){
+      QMessageBox::information(this,"Connected","Database Connected Successfully!");
+    }else{
+        QSqlError error = db.lastError();
+        QMessageBox::information(this, "Connection", error.databaseText());
+
+    }
+
+        QString SelectString;
+        QSqlQuery* SelectQuery = new QSqlQuery(db);
+        QSqlQueryModel * Modal = new QSqlQueryModel();
+        SelectQuery->prepare("select * from Klienci");
+        SelectQuery->exec();
+        if(!SelectQuery->exec()) {
+            qDebug() << "SQL Statement Error 2" << SelectQuery->lastError();
+        }
+        qDebug()<<"success!"<<endl;
+        Modal->setQuery(*SelectQuery);
+        ui->tableView->setModel(Modal);
+//    QString query = "CREATE TABLE testtable ("
+//                    "ID INTEGER,"
+//                    "FirstName TEXT,"
+//                    "LastName TEXT,"
+//                    "Birthdate NUMERIC,"
+//                    "Weight REAL);";
+//    QSqlQuery qry;
+
+//    if(!qry.exec(query))
+//    {
+//        qDebug()<<"error creating table";
+
+//    }
+
+}
+
+
 ///////////////////
 //SERVICE TAB BAR//
 ///////////////////
@@ -155,3 +202,4 @@ void MainWindow::on_GeneralDiscountsButton_clicked()
 {
 
 }
+
