@@ -27,7 +27,8 @@ void MainWindow::on_DBconnectButton_clicked()
     //db.setHostName("192.168.0.73");
    // db.setUserName("root");
     //db.setPassword("Q29zjyip.");
-    db.setDatabaseName("C:/Users/Patelnia/Desktop/sqlite3/patelnia.db");
+    //db.setDatabaseName(":/Resources/Resources/patelnia.db");
+    db.setDatabaseName(QCoreApplication::applicationDirPath()+"/Resources/patelnia.db");
     if(db.open()){
       QMessageBox::information(this,"Connected","Database Connected Successfully!");
     }else{
@@ -47,6 +48,19 @@ void MainWindow::on_DBconnectButton_clicked()
         qDebug()<<"success!"<<endl;
         Modal->setQuery(*SelectQuery);
         ui->tableView->setModel(Modal);
+
+//        QSqlQuery query("SELECT * FROM Towary");
+//             while (query.next()) {
+//                 QString country = query.value(3).toString(); //INDEX W query.value() OZNACZA KOLUMNE W KTÓREJ WARTOŚCI TRAFIĄ DO STRINGA//
+//                 qDebug()<<country<<endl;
+//             }
+        QSqlQuery query("SELECT * FROM Towary");
+        query.next();
+        QString country = query.value(3).toString();
+        qDebug()<<country<<endl;
+        query.next();
+        QString country2 = query.value(3).toString();
+        qDebug()<<country2<<endl;
 //    QString query = "CREATE TABLE testtable ("
 //                    "ID INTEGER,"
 //                    "FirstName TEXT,"

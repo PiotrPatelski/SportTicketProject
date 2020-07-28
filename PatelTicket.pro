@@ -16,12 +16,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    article.cpp \
+    basket.cpp \
+    boughtarticle.cpp \
+    customer.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    transanction_menu.cpp
 
 HEADERS += \
     CustomTabStyle.h \
-    mainwindow.h
+    article.h \
+    basket.h \
+    boughtarticle.h \
+    customer.h \
+    mainwindow.h \
+    transanction_menu.h
 
 FORMS += \
     mainwindow.ui
@@ -30,3 +40,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Resources.qrc

@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     /////////////
     //TEST ROOM//
     /////////////
+    qDebug()<<QCoreApplication::applicationDirPath();
 //    QTime sometime = QTime::currentTime();
 //    QThread::msleep(2000);
 //    qDebug()<<"sometime= "<<sometime<<" and current is "<<QTime::currentTime()<<endl;

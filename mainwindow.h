@@ -6,6 +6,8 @@
 #include <QSqlDatabase>
 #include <QMessageBox>
 #include <QSqlError>
+#include "customer.h"
+#include "article.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
