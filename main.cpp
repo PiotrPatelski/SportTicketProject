@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QString>
 enum class State {active,suspended,inactive};
+
 int main(int argc, char *argv[])
 {
     QT_REQUIRE_VERSION(argc,argv,QT_VERSION_STR);
@@ -24,7 +25,23 @@ int main(int argc, char *argv[])
 //    if(valid == State::inactive)
 //        qDebug()<<"valid"<<endl;
 //    qDebug()<<QDateTime::currentDateTime();
+    Login loginWindow;
+    loginWindow.setModal(true);
+    loginWindow.exec();
 
-    w.show();
-    return a.exec();
+    if(loginWindow.state==0)
+    {
+
+        return 0;
+    }
+    else{
+        User user = loginWindow.user;
+        loginWindow.hide();
+        w.user= user;
+        w.show();
+
+        return a.exec();
+    }
+
+
 }

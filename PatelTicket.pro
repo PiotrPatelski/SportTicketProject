@@ -20,9 +20,11 @@ SOURCES += \
     basket.cpp \
     boughtarticle.cpp \
     customer.cpp \
+    login.cpp \
     main.cpp \
     mainwindow.cpp \
-    transanction_menu.cpp
+    transanction_menu.cpp \
+    user.cpp
 
 HEADERS += \
     CustomTabStyle.h \
@@ -30,10 +32,13 @@ HEADERS += \
     basket.h \
     boughtarticle.h \
     customer.h \
+    login.h \
     mainwindow.h \
-    transanction_menu.h
+    transanction_menu.h \
+    user.h
 
 FORMS += \
+    login.ui \
     mainwindow.ui
 
 # Default rules for deployment.

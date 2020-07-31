@@ -9,11 +9,40 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setCentralWidget(ui->MainTabWidget);
     ui->MainTabWidget->tabBar()->setStyle(new CustomTabStyle);
+
+
+    //WYŚWIETLAM KOMUNIKAT W statusbar
+    if(user.userName==0)
+        ui->statusbar->showMessage("Not logged in.");
+    else
+        usernameBuff = "Logged as: " + user.userName;
+        ui->statusbar->showMessage(usernameBuff);
+
+
+    //DODAJE PERMANENTNY WIDGET DO statusbar PARAMETREM FUNKCJI PO PRZECINKU JEST LICZBA OZNACZAJĄCA CZĘŚĆ PASKA JAKI WIDGET MA ZAJMOWAĆ
+    ui->statusbar->addPermanentWidget(ui->label_statusbar);
+
+    timer = new QTimer(this);
+
+
+    connect(timer, SIGNAL(timeout()),this,SLOT(guiClock()));
+    timer->start(1000);
+
+
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
+}
+
+void MainWindow::guiClock()
+{
+    QDateTime time = QDateTime::currentDateTime();
+    QString time_text = time.toString("dd.MM.yyyy                 hh : mm : ss");
+    ui->label_statusbar->setText(time_text);
 }
 
 
