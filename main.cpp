@@ -5,13 +5,15 @@
 #include <QDebug>
 #include <QString>
 enum class State {active,suspended,inactive};
-
+QString nickName{""};
+bool logged{0};
+QSqlDatabase db;
 int main(int argc, char *argv[])
 {
     QT_REQUIRE_VERSION(argc,argv,QT_VERSION_STR);
     qputenv("QT_DEBUG_PLUGINS", QByteArray("1"));
     QApplication a(argc, argv);
-    MainWindow w;
+
     /////////////
     //TEST ROOM//
     /////////////
@@ -28,20 +30,9 @@ int main(int argc, char *argv[])
     Login loginWindow;
     loginWindow.setModal(true);
     loginWindow.exec();
+    return loginWindow.checkLogin(logged, a);
 
-    if(loginWindow.state==0)
-    {
-
-        return 0;
-    }
-    else{
-        User user = loginWindow.user;
-        loginWindow.hide();
-        w.user= user;
-        w.show();
-
-        return a.exec();
-    }
 
 
 }
+

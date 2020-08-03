@@ -14,13 +14,15 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+extern QString nickName;
+extern QSqlDatabase db;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+    void clockInit(QTimer*);
     QString usernameBuff;
-    User user;
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 public slots:
@@ -89,9 +91,9 @@ private slots:
     void on_DBconnectButton_clicked();
 
 private:
-    //Login loginWindow;
-    QTimer *timer;
     Ui::MainWindow *ui;
+    QTimer *timer;
+
 };
 
 #endif // MAINWINDOW_H

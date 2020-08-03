@@ -6,38 +6,32 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    //TO DO: INTERFACE WINDOW INIT FUNCTION
+    //WILL ASSEMBLE TO A FUNCTION WHEN MORE WIDGETS ARE ADDED
     ui->setupUi(this);
     this->setCentralWidget(ui->MainTabWidget);
     ui->MainTabWidget->tabBar()->setStyle(new CustomTabStyle);
 
-
+    // PACK INTO SET_STATUS FUNC//
     //WYŚWIETLAM KOMUNIKAT W statusbar
-    if(user.userName==0)
-        ui->statusbar->showMessage("Not logged in.");
-    else
-        usernameBuff = "Logged as: " + user.userName;
-        ui->statusbar->showMessage(usernameBuff);
-
-
-    //DODAJE PERMANENTNY WIDGET DO statusbar PARAMETREM FUNKCJI PO PRZECINKU JEST LICZBA OZNACZAJĄCA CZĘŚĆ PASKA JAKI WIDGET MA ZAJMOWAĆ
+    usernameBuff = "Logged as: " + nickName;
+    ui->statusbar->showMessage(usernameBuff);
     ui->statusbar->addPermanentWidget(ui->label_statusbar);
+    // PACK INTO SET_STATUS FUNC//
 
-    timer = new QTimer(this);
-
-
-    connect(timer, SIGNAL(timeout()),this,SLOT(guiClock()));
-    timer->start(1000);
-
-
+    // CLOCK INITIALIZATION //
+    clockInit(timer);
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete timer;
 
 }
 
+//TIME TO STRING CONVERTION//
 void MainWindow::guiClock()
 {
     QDateTime time = QDateTime::currentDateTime();
@@ -45,26 +39,21 @@ void MainWindow::guiClock()
     ui->label_statusbar->setText(time_text);
 }
 
+//CLOCK INITIALIZATION//
+void MainWindow::clockInit(QTimer* timer)
+{
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()),this,SLOT(guiClock()));
+    timer->start(1000);
+}
 
 ///////////
-//DESKTOP//
+//DESKTOP//  W.I.P SECTION TO TEST DATABASE CONNECTION FOR FURTHER IMPLEMENTATION
 ///////////
 
 void MainWindow::on_DBconnectButton_clicked()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    //db.setHostName("192.168.0.73");
-   // db.setUserName("root");
-    //db.setPassword("Q29zjyip.");
-    //db.setDatabaseName(":/Resources/Resources/patelnia.db");
-    db.setDatabaseName(QCoreApplication::applicationDirPath()+"/Resources/patelnia.db");
-    if(db.open()){
-      QMessageBox::information(this,"Connected","Database Connected Successfully!");
-    }else{
-        QSqlError error = db.lastError();
-        QMessageBox::information(this, "Connection", error.databaseText());
 
-    }
 
         QString SelectString;
         QSqlQuery* SelectQuery = new QSqlQuery(db);
