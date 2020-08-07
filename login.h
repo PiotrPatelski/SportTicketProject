@@ -3,9 +3,11 @@
 
 #include <QDialog>
 #include <QCloseEvent>
+#include <vector>
+
 #include "user.h"
 #include "mainwindow.h"
-#include <vector>
+
 extern QString nickName;
 extern bool logged;
 extern QSqlDatabase db;
@@ -19,9 +21,11 @@ class Login : public QDialog
     Q_OBJECT
 
 public:
+
     QSqlDatabase db;
     std::vector<User> users{};
     explicit Login(QWidget *parent = nullptr);
+    int session(bool, QApplication&);
     int checkLogin(bool, QApplication&);
     void closeEvent(QCloseEvent *event) override;
     ~Login();

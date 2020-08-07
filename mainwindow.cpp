@@ -34,6 +34,7 @@ MainWindow::~MainWindow()
 //TIME TO STRING CONVERTION//
 void MainWindow::guiClock()
 {
+
     QDateTime time = QDateTime::currentDateTime();
     QString time_text = time.toString("dd.MM.yyyy                 hh : mm : ss");
     ui->label_statusbar->setText(time_text);

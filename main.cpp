@@ -27,11 +27,15 @@ int main(int argc, char *argv[])
 //    if(valid == State::inactive)
 //        qDebug()<<"valid"<<endl;
 //    qDebug()<<QDateTime::currentDateTime();
-    Login loginWindow;
-    loginWindow.setModal(true);
-    loginWindow.exec();
-    return loginWindow.checkLogin(logged, a);
 
+    //CREATING LOGIN WINDOW OBJ AND EXECTUING
+    //IF LOGIN CONDITION IS MET, RETURNED VALUE WILL BE MAIN WINDOW EXEC
+   Login loginWindow;
+   loginWindow.setModal(true);
+   loginWindow.exec();
+   return loginWindow.checkLogin(logged, a);
+
+    /////////////////////////
 
 
 }
