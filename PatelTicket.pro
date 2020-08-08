@@ -24,7 +24,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     transanction_menu.cpp \
-    user.cpp
+    user.cpp \
+    useraccounts.cpp
 
 HEADERS += \
     CustomTabStyle.h \
@@ -35,7 +36,8 @@ HEADERS += \
     login.h \
     mainwindow.h \
     transanction_menu.h \
-    user.h
+    user.h \
+    useraccounts.h
 
 FORMS += \
     login.ui \

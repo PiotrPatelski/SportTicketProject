@@ -4,13 +4,16 @@
 #include <QDialog>
 #include <QCloseEvent>
 #include <vector>
-
+#include<QMessageBox>
+#include <QDebug>
 #include "user.h"
 #include "mainwindow.h"
-
+#include "useraccounts.h"
+#include "user.h"
 extern QString nickName;
 extern bool logged;
 extern QSqlDatabase db;
+extern UserAccounts* accounts;
 namespace Ui {
 
 class Login;

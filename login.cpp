@@ -1,8 +1,5 @@
 #include "login.h"
 #include "ui_login.h"
-#include "QMessageBox"
-#include "QDebug"
-#include "mainwindow.h"
 Login::Login(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Login)
@@ -13,17 +10,20 @@ Login::Login(QWidget *parent) :
     //db.setUserName("root");
     //db.setPassword("");
     //db.setDatabaseName(":/Resources/Resources/patelnia.db");
-    //db.setDatabaseName(QCoreApplication::applicationDirPath()+"/Resources/patelnia.db");
-    db.setDatabaseName("C:/patelnia.db"); //DB PATH
+    db.setDatabaseName(QCoreApplication::applicationDirPath()+"/Resources/patelnia.db");
+    //qDebug()<<QCoreApplication::applicationDirPath()+"/Resources/patelnia.db"<<endl;
+    //db.setDatabaseName("C:/patelnia.db"); //DB PATH
     if(db.open()){
       QMessageBox::information(this,"Connected","Database Connected Successfully!");
     }else{
         QSqlError error = db.lastError();
         QMessageBox::information(this, "Connection", error.databaseText());
     }
-    ////////////////////////////////////////
-    //5-08-2020 wip
-    //ui->userName_textEdit->installEventFilter(key);
+
+    //INITIALIZING USERS LIST FROM DB
+    accounts = new UserAccounts;
+
+    //SETTING LOGIN UI
     ui->setupUi(this);
 
 }
@@ -57,20 +57,36 @@ int Login::checkLogin(bool logged, QApplication& app)
 }
 void Login::on_pushButton_clicked()
 {
+    //EDITED 8.08.2020
     nickName = ui->userName_lineEdit->text();
-    if( nickName == "test"){
-        logged=1;
+    QString password = ui->password_lineEdit->text();
+        //SEARCHING USERS LIST FOR VALID ACCOUNT NUMBER OR EMAIL
+        for(auto users = accounts->accountList->begin(); users!=accounts->accountList->end(); users++)
+        {
+            if( (nickName == QString::number((*users)->accountNumber) || nickName ==(*users)->email )&&
+                    password == (*users)->password ){
+                logged=1;
+                currentUser = *users;
+                nickName = (*users)->name+ " " + (*users)->surname;
+                QApplication::quit();
+            }
+            else
+            {
+                ui->validationLabel->setText("Invalid account number or password!\n Please try again.");
+            }
 
-        QApplication::quit();
-    }
+        }
+
+
+
 }
 
 void Login::closeEvent (QCloseEvent *event)
 {
-    QMessageBox::StandardButton resBtn = QMessageBox::question( this, "PatelTicket",
-                                                                    tr("Are you sure?\n"),
-                                                                    QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
-                                                                    QMessageBox::Yes);
+    QMessageBox::StandardButton resBtn = QMessageBox::question(this, "PatelTicket",
+                                                               tr("Are you sure?\n"),
+                                                               QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
+                                                               QMessageBox::Yes);
         if (resBtn != QMessageBox::Yes) {
             event->ignore();
         } else {

@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QTabBar>
-#include "CustomTabStyle.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -28,6 +28,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete timer;
+    delete currentUser;
+    delete accounts;
 
 }
 
@@ -68,18 +70,44 @@ void MainWindow::on_DBconnectButton_clicked()
         Modal->setQuery(*SelectQuery);
         ui->tableView->setModel(Modal);
 
+
+        //////////////QUERY TEST CODE///////////////////////////////////
+        /////////////WILL REMOVE IT ONCE QUERY HIERARCY IS READY///////
+////        QSqlQuery query("SELECT * FROM Towary");
+////             while (query.next()) {
+////                 QString country = query.value(3).toString(); //INDEX W query.value() OZNACZA KOLUMNE W KTÓREJ WARTOŚCI TRAFIĄ DO STRINGA//
+////                 qDebug()<<country<<endl;
+////             }
 //        QSqlQuery query("SELECT * FROM Towary");
-//             while (query.next()) {
-//                 QString country = query.value(3).toString(); //INDEX W query.value() OZNACZA KOLUMNE W KTÓREJ WARTOŚCI TRAFIĄ DO STRINGA//
-//                 qDebug()<<country<<endl;
+//        query.next();
+//        QString country = query.value(3).toString();
+//        qDebug()<<country<<endl;
+//        query.next();
+//        QString country2 = query.value(3).toString();
+//        qDebug()<<country2<<endl;
+//    QString SelectString;
+//    QSqlQuery* SelectQuery = new QSqlQuery(db);
+//    QSqlQueryModel * Modal = new QSqlQueryModel();
+//    SelectQuery->prepare("select * from Konta");
+//    SelectQuery->exec();
+//    if(!SelectQuery->exec()) {
+//        qDebug() << "SQL Statement Error 2" << SelectQuery->lastError();
+//    }
+//    qDebug()<<"success!"<<endl;
+//    Modal->setQuery(*SelectQuery);
+//    ui->tableView->setModel(Modal);
+//    QSqlQuery query("SELECT * FROM Konta");
+//          while (query.next()) {
+//              QString country = query.value(3).toString(); //INDEX W query.value() OZNACZA KOLUMNE W KTÓREJ WARTOŚCI TRAFIĄ DO STRINGA//
+//              qDebug()<<country<<endl;
 //             }
-        QSqlQuery query("SELECT * FROM Towary");
-        query.next();
-        QString country = query.value(3).toString();
-        qDebug()<<country<<endl;
-        query.next();
-        QString country2 = query.value(3).toString();
-        qDebug()<<country2<<endl;
+//    QSqlQuery query("SELECT * FROM Konta");
+//    query.next();
+//    QString country = query.value(1).toString();
+//    qDebug()<<country<<endl;
+//    query.next();
+//    QString country2 = query.value(3).toString();
+//    qDebug()<<country2<<endl;
 //    QString query = "CREATE TABLE testtable ("
 //                    "ID INTEGER,"
 //                    "FirstName TEXT,"

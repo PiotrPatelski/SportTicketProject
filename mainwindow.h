@@ -6,16 +6,20 @@
 #include <QSqlDatabase>
 #include <QMessageBox>
 #include <QSqlError>
+#include "CustomTabStyle.h"
 #include "customer.h"
 #include "article.h"
 #include "login.h"
 #include "user.h"
+#include "useraccounts.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 extern QString nickName;
 extern QSqlDatabase db;
+extern UserAccounts* accounts;
+extern User* currentUser;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

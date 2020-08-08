@@ -8,6 +8,8 @@ enum class State {active,suspended,inactive};
 QString nickName{""};
 bool logged{0};
 QSqlDatabase db;
+UserAccounts* accounts;
+User* currentUser;
 int main(int argc, char *argv[])
 {
     QT_REQUIRE_VERSION(argc,argv,QT_VERSION_STR);
@@ -18,6 +20,7 @@ int main(int argc, char *argv[])
     //TEST ROOM//
     /////////////
     qDebug()<<QCoreApplication::applicationDirPath();
+
 //    QTime sometime = QTime::currentTime();
 //    QThread::msleep(2000);
 //    qDebug()<<"sometime= "<<sometime<<" and current is "<<QTime::currentTime()<<endl;
@@ -33,6 +36,7 @@ int main(int argc, char *argv[])
    Login loginWindow;
    loginWindow.setModal(true);
    loginWindow.exec();
+
    return loginWindow.checkLogin(logged, a);
 
     /////////////////////////
