@@ -93,3 +93,9 @@ void Login::closeEvent (QCloseEvent *event)
             logged=0;
         }
 }
+
+void Login::on_configButton_clicked()
+{
+    ConfigLogin conflog;
+    conflog.exec();
+}

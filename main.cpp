@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
 
     //CREATING LOGIN WINDOW OBJ AND EXECTUING
     //IF LOGIN CONDITION IS MET, RETURNED VALUE WILL BE MAIN WINDOW EXEC
+    qDebug()<<QCoreApplication::applicationDirPath()+"/Resources/patelnia.db"<<"TESTTT"<<endl;
    Login loginWindow;
    loginWindow.setModal(true);
    loginWindow.exec();

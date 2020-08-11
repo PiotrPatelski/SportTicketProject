@@ -10,6 +10,7 @@
 #include "mainwindow.h"
 #include "useraccounts.h"
 #include "user.h"
+#include "configlogin.h"
 extern QString nickName;
 extern bool logged;
 extern QSqlDatabase db;
@@ -35,6 +36,10 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_submitButton_clicked();
+
+    void on_configButton_clicked();
 
 private:
     Ui::Login *ui;

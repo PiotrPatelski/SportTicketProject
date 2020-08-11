@@ -19,6 +19,8 @@ SOURCES += \
     article.cpp \
     basket.cpp \
     boughtarticle.cpp \
+    config.cpp \
+    configlogin.cpp \
     customer.cpp \
     login.cpp \
     main.cpp \
@@ -32,6 +34,8 @@ HEADERS += \
     article.h \
     basket.h \
     boughtarticle.h \
+    config.h \
+    configlogin.h \
     customer.h \
     login.h \
     mainwindow.h \
@@ -40,6 +44,8 @@ HEADERS += \
     useraccounts.h
 
 FORMS += \
+    config.ui \
+    configlogin.ui \
     login.ui \
     mainwindow.ui
 
