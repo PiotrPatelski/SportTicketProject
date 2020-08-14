@@ -6,7 +6,7 @@
 namespace Ui {
 class ConfigLogin;
 }
-
+extern bool databaseIsSet;
 class ConfigLogin : public QDialog
 {
     Q_OBJECT

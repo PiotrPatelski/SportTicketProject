@@ -4,6 +4,45 @@ Login::Login(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Login)
 {
+
+
+//13.08.2020 TO DO: CREATE FUNCTION FOR CONFIG FILE USAGE
+    //TESTING CONFIG FILE CREATION AND EDITING
+    QFile configFile(QCoreApplication::applicationDirPath()+"Config.txt");
+    if (!configFile.exists()){
+        QMessageBox::warning(this,"Config Error","Config file does not exist!\n Creating new config");
+        if(!configFile.open(QFile::WriteOnly | QFile::Text)){
+            QMessageBox::warning(this,"Config Error","Config file can't be opened!");
+        }
+        else{
+            QTextStream out(&configFile);
+            QString textToConfig = "           //CONFIG FILE//           \n"
+                                   "databaseName = 0\n"
+                                   "adminLogin = admin\n"
+                                   "adminPassword = 696930989";
+            out << textToConfig;
+            configFile.flush();
+            configFile.close();
+            QMessageBox::information(this,"Wrote Message",textToConfig);
+            ConfigLogin conflog;
+            conflog.exec();
+        }
+
+    }
+    else{
+        if(!configFile.open(QFile::ReadOnly | QFile::Text)){
+           QMessageBox::warning(this,"Config Error","Config file can't be opened!");
+        }
+        else{
+            QTextStream in(&configFile);
+            QString textFromConfig = in.readAll();
+            QMessageBox::information(this,"Read Message",textFromConfig);
+        }
+
+    }
+/////////////////////////////////////////////////
+
+
     //ESTABLISHING CONNECTION TO DATABASE//
     db = QSqlDatabase::addDatabase("QSQLITE"); //DB ENGINE
     //db.setHostName("192.168.0.73");

@@ -6,6 +6,8 @@
 #include <vector>
 #include<QMessageBox>
 #include <QDebug>
+#include <QFile>
+#include <QTextStream>
 #include "user.h"
 #include "mainwindow.h"
 #include "useraccounts.h"
@@ -25,7 +27,7 @@ class Login : public QDialog
     Q_OBJECT
 
 public:
-
+    bool databaseIsSet{0};
     QSqlDatabase db;
     std::vector<User> users{};
     explicit Login(QWidget *parent = nullptr);

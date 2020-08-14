@@ -10,6 +10,7 @@ bool logged{0};
 QSqlDatabase db;
 UserAccounts* accounts;
 User* currentUser;
+bool databaseIsSet{0};
 int main(int argc, char *argv[])
 {
     QT_REQUIRE_VERSION(argc,argv,QT_VERSION_STR);
