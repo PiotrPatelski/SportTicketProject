@@ -58,7 +58,7 @@ void MainWindow::on_DBconnectButton_clicked()
 {
 
 
-        QString SelectString;
+        //QString SelectString;
         QSqlQuery* SelectQuery = new QSqlQuery(db);
         QSqlQueryModel * Modal = new QSqlQueryModel();
         SelectQuery->prepare("select * from Klienci");

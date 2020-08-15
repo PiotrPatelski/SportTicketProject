@@ -39,8 +39,6 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-    void on_submitButton_clicked();
-
     void on_configButton_clicked();
 
 private:

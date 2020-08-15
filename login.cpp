@@ -9,17 +9,18 @@ Login::Login(QWidget *parent) :
 //13.08.2020 TO DO: CREATE FUNCTION FOR CONFIG FILE USAGE
     //TESTING CONFIG FILE CREATION AND EDITING
     QFile configFile(QCoreApplication::applicationDirPath()+"Config.txt");
-    if (!configFile.exists()){
+    if (!configFile.exists()){ //CHECKS IF CONFIG FILE DOESNT EXIST
         QMessageBox::warning(this,"Config Error","Config file does not exist!\n Creating new config");
-        if(!configFile.open(QFile::WriteOnly | QFile::Text)){
+        if(!configFile.open(QFile::WriteOnly | QFile::Text)){// CHECKS IF CONFIG FILE CANT BE OPENED
             QMessageBox::warning(this,"Config Error","Config file can't be opened!");
         }
-        else{
+        else{ //IF CONFIG FILE DOESNT EXIT, WE'RE CREATING NEW ONE WITH DEFAULT PARAMETERS FOR FURTHER EDITING
             QTextStream out(&configFile);
             QString textToConfig = "           //CONFIG FILE//           \n"
                                    "databaseName = 0\n"
                                    "adminLogin = admin\n"
-                                   "adminPassword = 696930989";
+                                   "adminPassword = 696930989\n"
+                                   "recentDataBases = \n";
             out << textToConfig;
             configFile.flush();
             configFile.close();
@@ -29,11 +30,11 @@ Login::Login(QWidget *parent) :
         }
 
     }
-    else{
-        if(!configFile.open(QFile::ReadOnly | QFile::Text)){
+    else{// IF CONFIG FILE ALREADY EXIST
+        if(!configFile.open(QFile::ReadOnly | QFile::Text)){// CHECKS IF CONFIG FILE CANT BE OPENED
            QMessageBox::warning(this,"Config Error","Config file can't be opened!");
         }
-        else{
+        else{// FETCHING DATA FROM CONFIG FILE TO INITIALIZE DATABASE, ADMIN AND CONFIG SETTINGS
             QTextStream in(&configFile);
             QString textFromConfig = in.readAll();
             QMessageBox::information(this,"Read Message",textFromConfig);

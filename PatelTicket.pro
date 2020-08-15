@@ -25,6 +25,7 @@ SOURCES += \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
+    newdb.cpp \
     transanction_menu.cpp \
     user.cpp \
     useraccounts.cpp
@@ -39,6 +40,7 @@ HEADERS += \
     customer.h \
     login.h \
     mainwindow.h \
+    newdb.h \
     transanction_menu.h \
     user.h \
     useraccounts.h
@@ -47,7 +49,9 @@ FORMS += \
     config.ui \
     configlogin.ui \
     login.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    newdb.ui \
+    useraccounts.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
